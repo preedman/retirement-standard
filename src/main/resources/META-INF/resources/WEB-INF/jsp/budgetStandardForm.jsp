@@ -12,7 +12,7 @@
 <body>
 <div class="container mt-5">
     <h2>Budget Standard Form</h2>
-    <form:form method="POST" modelAttribute="budgetStandard" action="/budgetstandard/save" class="needs-validation" novalidate="true">
+    <form:form method="POST" modelAttribute="budgetStandard" action="/save" class="needs-validation" novalidate="true">
         <form:hidden path="id"/>
 
         <div class="mb-3">

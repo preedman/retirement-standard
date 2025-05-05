@@ -1,9 +1,10 @@
 package com.reedmanit.retirement.standard.controller;
 
 import com.reedmanit.retirement.standard.data.Budgetstandard;
-import com.reedmanit.retirement.standard.service.BudgetStandardRepository;
-import com.reedmanit.retirement.standard.service.ItemsRepository;
+import com.reedmanit.retirement.standard.service.*;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +22,17 @@ public class BudgetStandardController {
 
     @Autowired
     private ItemsRepository itemsRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private LifestyleRepository lifestyleRepository;
+
+    @Autowired
+    private RetirementTypeRepository retirementTypeRepository;
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
 
     @RequestMapping(value = "/budgetstandards", method = RequestMethod.GET)
@@ -101,7 +113,9 @@ public class BudgetStandardController {
     @PostMapping("/save")
     public String saveBudgetStandard(@Valid @ModelAttribute("budgetStandard") Budgetstandard budgetStandard,
                                      BindingResult result, Model model) {
+
         if (result.hasErrors()) {
+            logger.info(result.getAllErrors().toString());
             addFormAttributes(model);
             return "budgetStandardForm";
         }
@@ -111,9 +125,12 @@ public class BudgetStandardController {
     }
 
     private void addFormAttributes(Model model) {
-        model.addAttribute("lifestyles", budgetStandardRepository.findAllLifestyles());
-        model.addAttribute("categories", budgetStandardRepository.findAllCategories());
-        model.addAttribute("retirementTypes", budgetStandardRepository.findAllRetirementTypes());
+       // model.addAttribute("lifestyles", budgetStandardRepository.findAllLifestyles());
+        model.addAttribute("lifestyles", lifestyleRepository.findAllLifestyles());
+      //  model.addAttribute("categories", budgetStandardRepository.findAllCategories());
+        model.addAttribute("categories", categoryRepository.findAllCategories());
+    //        model.addAttribute("retirementTypes", budgetStandardRepository.findAllRetirementTypes());
+        model.addAttribute("retirementTypes", retirementTypeRepository.findAllRetirementTypes());
         // You'll need to add a method to get all items
         model.addAttribute("items", itemsRepository.findAll());
     }
