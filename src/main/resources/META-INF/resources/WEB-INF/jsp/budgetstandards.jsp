@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h2 class="mb-4">Budget Standards</h2>
+    <h2 class="mb-4">AFSA Retirement Standard for retirees 65 - 84. September Qtr 2024</h2>
 
     <!-- Enhanced Filter Section -->
     <div class="row mb-4">
@@ -75,27 +75,29 @@
                 <table class="table table-striped table-bordered table-hover">
                     <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
-                        <th>Budget Per Week</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                    <!--    <th>ID</th>  -->
+                    <!--    <th>Budget Per Week</th> -->
+                    <!--<th>Start Date</th>  -->
+                    <!--<th>End Date</th> -->
                         <th>Category</th>
                         <th>Item</th>
                         <th>Lifestyle</th>
                         <th>Retirement Type</th>
+                        <th>Budget Per Week</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${budgetStandards}" var="budget">
                         <tr>
-                            <td>${budget.id}</td>
-                            <td><fmt:formatNumber value="${budget.budgetperweek}" type="currency" currencySymbol="$"/></td>
-                            <td><fmt:formatDate value="${budget.startdate}" pattern="MM/dd/yyyy"/></td>
-                            <td><fmt:formatDate value="${budget.enddate}" pattern="MM/dd/yyyy"/></td>
+                         <!--   <td>${budget.id}</td> -->
+
+                         <!--   <td><fmt:formatDate value="${budget.startdate}" pattern="MM/dd/yyyy"/></td> -->
+                         <!--   <td><fmt:formatDate value="${budget.enddate}" pattern="MM/dd/yyyy"/></td> -->
                             <td>${budget.category.description}</td>
                             <td>${budget.item.description}</td>
                             <td>${budget.lifestyle.description}</td>
                             <td>${budget.retirementtype.description}</td>
+                            <td><fmt:formatNumber value="${budget.budgetperweek}" type="currency" currencySymbol="$"/></td>
                         </tr>
                     </c:forEach>
                     </tbody>
