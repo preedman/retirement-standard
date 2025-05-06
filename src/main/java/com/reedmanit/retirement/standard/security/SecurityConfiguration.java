@@ -24,7 +24,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((requests) -> requests
                         // Define public URLs
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "/sw.js").permitAll()
-                        .requestMatchers("/", "/home", "/about").permitAll()
+                        .requestMatchers("/", "/home", "/about", "/welcome").permitAll()
+
                         // Secure budget-related URLs
                         .requestMatchers("/budgetstandards/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/create", "/edit/**", "/save").hasRole("ADMIN")
