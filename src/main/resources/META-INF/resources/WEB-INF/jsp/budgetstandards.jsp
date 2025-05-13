@@ -3,6 +3,18 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-3 p-1">
+    <a class="navbar-brand m-1" target="_blank" href="https://sites.google.com/reedmanit.com/software/home">ReedmanIT</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="/">Welcome</a></li>
+            <li class="nav-item"><a class="nav-link" href="/create">New</a></li>
+        </ul>
+    </div>
+    <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+    </ul>
+</nav>
 <head>
     <title>Budget Standards</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
