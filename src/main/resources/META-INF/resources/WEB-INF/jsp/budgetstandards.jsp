@@ -7,7 +7,7 @@
     <a class="navbar-brand m-1" target="_blank" href="https://sites.google.com/reedmanit.com/software/home">ReedmanIT</a>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="/">Welcome</a></li>
+            <li class="nav-item"><a class="nav-link" href="/erv">Welcome</a></li>
             <li class="nav-item"><a class="nav-link" href="/create">New</a></li>
         </ul>
     </div>

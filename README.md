@@ -84,7 +84,7 @@ Apache - [https://www.apache.org/licenses/LICENSE-2.0]
 
 Paul Reedman - [paul.reedman@reedmanit.com](mailto:your.email@example.com)
 
-Project Link: [https://github.com/yourusername/budget-standards](https://github.com/yourusername/budget-standards)
+Project Link: [https://github.com/preedman/budget-standards](https://github.com/preedman/budget-standards)
 
 ## Acknowledgments
 
