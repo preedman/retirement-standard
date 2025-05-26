@@ -48,6 +48,7 @@ public class SecurityConfiguration {
 
 
                 .csrf(csrf -> csrf.disable()); // Enable this in production
+
         http.formLogin(withDefaults());
         return http.build();
     }
