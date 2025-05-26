@@ -29,10 +29,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((requests) -> requests
                         // Define public URLs
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "/sw.js").permitAll()
-                        .requestMatchers("/", "/welcome").permitAll()
+                        .requestMatchers("/").permitAll()
 
                         // Secure budget-related URLs
-                        .requestMatchers("/budgetstandards/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/budgetstandards/**", "/welcome/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/create", "/edit/**", "/save").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
@@ -41,10 +41,10 @@ public class SecurityConfiguration {
              //           .permitAll()
              //           .defaultSuccessUrl("/budgetstandards", true)
             //    )
-                .logout((logout) -> logout
-                        .permitAll()
-                        .logoutSuccessUrl("/")
-                )
+            //    .logout((logout) -> logout
+            //            .permitAll()
+            //            .logoutSuccessUrl("/")
+            //    )
 
 
                 .csrf(csrf -> csrf.disable()); // Enable this in production
