@@ -16,12 +16,13 @@ public class WelcomeController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String goToWelcomePage(ModelMap model) {
 
         logger.info("Welcome page");
         model.put("name", getLoggedinUserName());
         return "welcome";
+       // return "budgetstandards";
     }
 
     private String getLoggedinUserName() {
