@@ -29,9 +29,17 @@ public class MyUserDetailService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        // Add debug logging
+        System.out.println("Attempting to load user: " + username);
+
         Optional<MyUser> myUserOptional = myUserRepository.findByUsername(username);
         if (myUserOptional.isPresent()) {
             MyUser myUser = myUserOptional.get();
+
+            // Add more debug logging
+            System.out.println("User loaded successfully: " + username);
+
 
             return org.springframework.security.core.userdetails.User.builder()
                     .username(myUser.getUsername())

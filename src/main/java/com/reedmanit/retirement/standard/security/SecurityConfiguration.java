@@ -1,67 +1,85 @@
 package com.reedmanit.retirement.standard.security;
 
 import com.reedmanit.retirement.standard.service.MyUserDetailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
 
-    MyUserDetailService MyUserDetailService;
+    MyUserDetailService myUserDetailService;
 
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
     public SecurityConfiguration(MyUserDetailService myUserDetailService) {
-        this.MyUserDetailService = myUserDetailService;
+        this.myUserDetailService = myUserDetailService;
     }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        logger.info("Security Configuration !!!!!!!");
+
         http
                 .authorizeHttpRequests((requests) -> requests
-                        // Define public URLs
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "/sw.js").permitAll()
-                        .requestMatchers("/").permitAll()
-
-                        // Secure budget-related URLs
-                        .requestMatchers("/budgetstandards/**", "/welcome/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/login", "/error/**", "/logout").permitAll()
+                        .requestMatchers("/WEB-INF/jsp/**").permitAll()
                         .requestMatchers("/create", "/edit/**", "/save").hasRole("ADMIN")
+                        .requestMatchers("/budgetstandards/**", "/welcome/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
-             //   .formLogin((form) -> form
-             //           .loginPage("/login")
-             //           .permitAll()
-             //           .defaultSuccessUrl("/budgetstandards", true)
-            //    )
-            //    .logout((logout) -> logout
-            //            .permitAll()
-            //            .logoutSuccessUrl("/")
-            //    )
+                .formLogin((form) -> form
+                        .loginPage("/login")
+                      //  .loginProcessingUrl("/login-process") // Changed to avoid conflict
+                 //       .failureUrl("/login?error=true")
+                        .failureUrl("/login")
+                        .permitAll()
+                        .defaultSuccessUrl("/budgetstandards", true) // Changed to false to prevent forced redirect
+                )
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .permitAll()
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                )
+            //    .sessionManagement(session -> session
+            //            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+           //             .invalidSessionUrl("/login")
+           //             .maximumSessions(1)
+           //             .maxSessionsPreventsLogin(true)
+           //     )
+                .csrf(csrf -> csrf.disable());
 
-
-                .csrf(csrf -> csrf.disable()); // Enable this in production
-
-        http.formLogin(withDefaults());
         return http.build();
     }
 
     @Bean
     public UserDetailsService userDetailService() {
-        return MyUserDetailService;
+        return myUserDetailService;
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(MyUserDetailService);
+        daoAuthenticationProvider.setUserDetailsService(myUserDetailService);
         daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return daoAuthenticationProvider;
     }
@@ -70,28 +88,4 @@ public class SecurityConfiguration {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-/**
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("userpass"))
-                .roles("USER")
-                .build();
-
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder().encode("adminpass"))
-                .roles("USER", "ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user, admin);
-    }
-    */
 }
-

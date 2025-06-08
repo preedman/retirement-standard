@@ -39,7 +39,7 @@ public class BudgetStandardController {
 
 
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/budgetstandards", method = RequestMethod.GET)
     public String listBudgetStandards(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
