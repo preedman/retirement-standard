@@ -2,6 +2,8 @@
 
 A web application that displays AFSA Retirement Standards for retirees aged 65-84, allowing users to filter and view budget standards based on different criteria.
 
+ Technical documentation: [https://github.com/preedman/retirement-standard/wiki] 
+
 ## Features
 
 - Interactive filtering system for:
@@ -84,7 +86,7 @@ Apache - [https://www.apache.org/licenses/LICENSE-2.0]
 
 Paul Reedman - [paul.reedman@reedmanit.com](mailto:your.email@example.com)
 
-Project Link: [https://github.com/preedman/budget-standards](https://github.com/preedman/budget-standards)
+Project Link: [https://github.com/users/preedman/projects/13](https://github.com/preedman/budget-standards)
 
 ## Acknowledgments
 
