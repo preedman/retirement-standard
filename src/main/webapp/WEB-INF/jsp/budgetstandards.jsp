@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <nav class="navbar navbar-expand-md navbar-light bg-light mb-3 p-1">
-    <a class="navbar-brand m-1" target="_blank" href="https://sites.google.com/reedmanit.com/software/home">ReedmanIT</a>
+    <!-- <a class="navbar-brand m-1" target="_blank" href="https://sites.google.com/reedmanit.com/software/home">ReedmanIT</a> -->
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link" href="https://www.superannuation.asn.au/resources/retirement-standard">ASFA Retirement Standard</a></li>
